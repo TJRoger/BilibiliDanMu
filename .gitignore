@@ -141,4 +141,5 @@ _deps
 # External projects
 *-prefix/
 
-# End of https://www.gitignore.io/api/c++,cmake,clion
+# End of https://www.gitignore.io/api/c++,cmake,clionbuild/
+build/
