@@ -150,6 +150,11 @@ int rcvPack(WebSocket *&ws, int size) {
 
 
 int main(int args, char **argv) {
+    std::string roomId;
+    std::string input;
+    std::cout << "请输入房间号,默认'22247501'(y):";
+    std::cin >> input;
+    roomId = (input == "y" || input == "Y") ? "22247501" : input;
     HTTPClientSession cs("broadcastlv.chat.bilibili.com", 2244);
     HTTPRequest request(HTTPRequest::HTTP_GET, "/sub", HTTPMessage::HTTP_1_1);
     request.set("origin", "http://broadcastlv.chat.bilibili.com");
@@ -159,7 +164,7 @@ int main(int args, char **argv) {
     std::time_t last_time{std::time(nullptr)};
     try {
         socket = new WebSocket(cs, request, response);
-        connectToDanmuServer(socket, "1361615");
+        connectToDanmuServer(socket, roomId);
         while (true) {
             rcvPack(socket, 2048);
             if (time(nullptr) - last_time >= 30) {
